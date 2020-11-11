@@ -24,28 +24,46 @@ import { Link } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 
 export const Events = () => {
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
-	const [title, setTitle] = useState("");
+	
 	const currentDate = "2018-11-01";
 
-	const [singleEvent, setSingleEvent] = useState();
-	const [events, setEvents] = useState([]);
+	const [events, setEvents] = useState([
+		{ startDate: "2018-11-01T09:45", endDate: "2018-11-01T11:00", title: "Meeting" },
+		{ startDate: "2018-11-01T12:00", endDate: "2018-11-01T13:00", title: "Go to a gym" },
+		{ startDate: "2018-11-01T13:00", endDate: "2018-11-01T14:30", title: "Groceries" },
+		{ startDate: "2018-11-01T15:00", endDate: "2018-11-01T15:30", title: "Run" }
+	]);
+	// hook? in startDate and endDate
+
+	// useEffect(() => {
+	// 	fetch(
+	// 		"https://3000-e602aabd-5ee2-4e3c-83ab-16569a08f1a5.ws-us02.gitpod.io/todos"
+	// 	)
+	// 		.then(function(response) {
+	// 			if (!response.ok) {
+	// 				throw Error(response.statusText);
+	// 			}
+	// 			// Read the response as json.
+	// 			return response.json();
+	// 		})
+	// 		.then(function(responseAsJson) {
+	// 			// Do stuff with the JSON
+	// 			console.log("responseAsJson", responseAsJson);
+	// 			setTodos(responseAsJson);
+	// 		})
+	// 		.catch(function(error) {
+	// 			console.log("Looks like there was a problem: \n", error);
+	// 		});
+	// }, []);
 
 	const handleChange = e => {
 		setSingleEvent(e.target.value);
 	};
 	const handleClick = e => {
 		const newEvent = {
-			title: title,
 			startDate: startDate,
-			notifications: {
-				dayOf: false,
-				dayPrior: false,
-				twoDaysPrior: false,
-				weekPrior: false,
-				twoWeekPrior: false
-			}
+			endDate: endDate,
+			title: singleEvent
 		};
 		setEvents([...events, newEvent]);
 		// 	fetch(
@@ -111,6 +129,8 @@ export const Events = () => {
 	return (
 		<>
 			<div className="input-container">
+				<DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+				<DatePicker selected={endDate} onChange={date => setEndDate(date)} />
 				<form onSubmit={e => e.preventDefault()}>
 					<input type="text" name="event" value={singleEvent} onChange={handleChange} />
 					<button onClick={handleClick}> Save </button>
