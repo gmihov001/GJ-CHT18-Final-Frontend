@@ -128,16 +128,6 @@ export const Events = () => {
 					</div>
 				);
 			})}
-			<Paper>
-				<Scheduler data={events}>
-					<ViewState currentDate={currentDate} />
-					<MonthView startDayHour={7} endDayHour={20} />
-					<Toolbar />
-					<DateNavigator />
-					<TodayButton />
-					<Appointments />
-				</Scheduler>
-			</Paper>
 		</>
 	);
 };

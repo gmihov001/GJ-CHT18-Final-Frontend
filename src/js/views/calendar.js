@@ -23,15 +23,16 @@ import { Link } from "react-router-dom";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-export const Events = () => {
-	
-	const currentDate = "2018-11-01";
+export const Calendar = () => {
+	const currentDate = new Date();
+	const [startDate, setStartDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(new Date());
 
 	const [events, setEvents] = useState([
-		{ startDate: "2018-11-01T09:45", endDate: "2018-11-01T11:00", title: "Meeting" },
-		{ startDate: "2018-11-01T12:00", endDate: "2018-11-01T13:00", title: "Go to a gym" },
-		{ startDate: "2018-11-01T13:00", endDate: "2018-11-01T14:30", title: "Groceries" },
-		{ startDate: "2018-11-01T15:00", endDate: "2018-11-01T15:30", title: "Run" }
+		{ startDate: "2020-11-12T09:45", title: "Meeting" },
+		{ startDate: "2020-11-13T12:00", title: "Go to a gym" },
+		{ startDate: "2020-11-14T13:00", title: "Groceries" },
+		{ startDate: "2020-11-11T15:00", title: "Run" }
 	]);
 	// hook? in startDate and endDate
 
@@ -128,30 +129,10 @@ export const Events = () => {
 
 	return (
 		<>
-			<div className="input-container">
-				<DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-				<DatePicker selected={endDate} onChange={date => setEndDate(date)} />
-				<form onSubmit={e => e.preventDefault()}>
-					<input type="text" name="event" value={singleEvent} onChange={handleChange} />
-					<button onClick={handleClick}> Save </button>
-				</form>
-			</div>
-
-			{events.map((event, i) => {
-				return (
-					<div className="event" key={i}>
-						{event.title}
-
-						<button className="btn-delete" type="button" onClick={() => deleteTodo(i)}>
-							X
-						</button>
-					</div>
-				);
-			})}
 			<Paper>
 				<Scheduler data={events}>
 					<ViewState currentDate={currentDate} />
-					<MonthView startDayHour={7} endDayHour={20} />
+					<WeekView startDayHour={7} endDayHour={20} />
 					<Toolbar />
 					<DateNavigator />
 					<TodayButton />
