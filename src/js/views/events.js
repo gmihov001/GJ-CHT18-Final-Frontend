@@ -186,8 +186,7 @@ export const Events = () => {
 					</div>
 				</div>
 				<button className="btn btn-lg btn-primary px-5" onClick={handleClick}>
-					{" "}
-					Save{" "}
+					Save
 				</button>
 			</div>
 
