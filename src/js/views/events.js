@@ -27,7 +27,18 @@ export const Events = () => {
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
 	const [title, setTitle] = useState("");
-	const currentDate = "2018-11-01";
+	const currentDate = new Date();
+
+	const [state, setState] = useState({
+		title: "",
+		date: "",
+		time: "",
+		dayOf: false,
+		dayPrior: false,
+		twoDaysPrior: false,
+		weekPrior: false,
+		twoWeekPrior: false
+	});
 
 	const [singleEvent, setSingleEvent] = useState();
 	const [events, setEvents] = useState([]);
@@ -90,31 +101,94 @@ export const Events = () => {
 	// 			console.log("Looks like there was a problem: \n", error);
 	// 		});
 
-	//filter cannot be a standalone function, it needs to be a variable example: var newTodos =
-	//after filtering the function we needed to set the new todos to the updated (setTodos) so it can show the new
-	//list of labels without the item we deleted
-	// };
-
-	//   export default class Demo extends React.PureComponent {
-	//   constructor(props) {
-	//     super(props);
-
-	//     this.state = {
-	//       data: appointments,
-	//     };
-	//   }
-
-	//   render() {
-	//     const { data } = this.state;
-	//TURN THIS CLASS INTO A HOOK IN ORDER TO MAKE DATE NAVIGATION EASIER
-
 	return (
 		<>
 			<div className="input-container">
-				<form onSubmit={e => e.preventDefault()}>
-					<input type="text" name="event" value={singleEvent} onChange={handleChange} />
-					<button onClick={handleClick}> Save </button>
-				</form>
+				<div className="input-group mb-3">
+					<div className="input-group-prepend">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Title
+						</span>
+					</div>
+					<input
+						type="text"
+						className="form-control"
+						aria-label="Default"
+						aria-describedby="inputGroup-sizing-default"
+					/>
+				</div>
+				<div className="input-group mb-3">
+					<div className="input-group-prepend">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Date
+						</span>
+					</div>
+					<input
+						type="text"
+						className="form-control"
+						aria-label="Default"
+						aria-describedby="inputGroup-sizing-default"
+					/>
+				</div>
+				<div className="input-group mb-3">
+					<div className="input-group-prepend">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Time
+						</span>
+					</div>
+					<input
+						type="text"
+						className="form-control"
+						aria-label="Default"
+						aria-describedby="inputGroup-sizing-default"
+					/>
+				</div>
+				<div className="input-group mb-3">
+					<div className="input-group-prepend ml-2">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Day Of
+						</span>
+					</div>
+					<div className="input-group-text">
+						<input type="checkbox" aria-label="Checkbox for following text input" />
+					</div>
+					<div className="input-group-prepend ml-2">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Day Prior
+						</span>
+					</div>
+					<div className="input-group-text">
+						<input type="checkbox" aria-label="Checkbox for following text input" />
+					</div>
+					<div className="input-group-prepend ml-2">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Two Days Prior
+						</span>
+					</div>
+					<div className="input-group-text">
+						<input type="checkbox" aria-label="Checkbox for following text input" />
+					</div>
+					<div className="input-group-prepend ml-2">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Week Prior
+						</span>
+					</div>
+					<div className="input-group-text">
+						<input type="checkbox" aria-label="Checkbox for following text input" />
+					</div>
+					<div className="input-group-prepend ml-2">
+						<span className="input-group-text" id="inputGroup-sizing-default">
+							Two Weeks Prior
+						</span>
+					</div>
+					<div className="input-group-text">
+						<input type="checkbox" aria-label="Checkbox for following text input" />
+					</div>
+				</div>
+				<button className="btn btn-lg btn-primary px-5" onClick={handleClick}>
+					{" "}
+					Save{" "}
+				</button>
 			</div>
 
 			{events.map((event, i) => {
